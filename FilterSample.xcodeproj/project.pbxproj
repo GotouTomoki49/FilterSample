@@ -53,6 +53,7 @@
 			children = (
 				7FBAA311286A84A900E775D8 /* FilterSampleApp.swift */,
 				7FBAA313286A84A900E775D8 /* ContentView.swift */,
+				7FBAA31F286A84B300E775D8 /* Content */,
 				7FBAA315286A84AC00E775D8 /* Assets.xcassets */,
 				7FBAA317286A84AC00E775D8 /* Preview Content */,
 			);
@@ -65,6 +66,45 @@
 				7FBAA318286A84AC00E775D8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7FBAA31F286A84B300E775D8 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				7FBAA323286A84E600E775D8 /* ImagePicker */,
+				7FBAA322286A84D700E775D8 /* FilterContentView */,
+				7FBAA321286A84CB00E775D8 /* CustomToolBar */,
+				7FBAA320286A84BA00E775D8 /* FilterBanner */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		7FBAA320286A84BA00E775D8 /* FilterBanner */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FilterBanner;
+			sourceTree = "<group>";
+		};
+		7FBAA321286A84CB00E775D8 /* CustomToolBar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomToolBar;
+			sourceTree = "<group>";
+		};
+		7FBAA322286A84D700E775D8 /* FilterContentView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FilterContentView;
+			sourceTree = "<group>";
+		};
+		7FBAA323286A84E600E775D8 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ImagePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
