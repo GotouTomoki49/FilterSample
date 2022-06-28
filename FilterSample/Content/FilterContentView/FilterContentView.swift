@@ -50,14 +50,18 @@ struct FilterContentView: View {
             //カメラが利用できるからカメラボタンを追加
             let cameraButton =
             ActionSheet.Button
-                .default(Text("写真を撮る")){}
+                .default(Text("写真を撮る")){
+                    viewModel.apply(.tappedActionSheet(selectType: .camera))
+                }
             buttons.append(cameraButton)
             
         }
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             //フォトライブラリーが使えるならばフォトライブラリーボタンを追加
             let photoLibraryButton =
-            ActionSheet.Button.default(Text("アルバムから選択")) {}
+            ActionSheet.Button.default(Text("アルバムから選択")) {
+                viewModel.apply(.tappedActionSheet(selectType: .photoLibrary))
+            }
             buttons.append(photoLibraryButton)
             
         }
