@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FilterContentView: View {
     @State private var filtedImage: UIImage?
+    @StateObject private var viewModel = FilterContentViewModel()
     var body: some View {
         NavigationView{
             ZStack{
@@ -32,8 +33,14 @@ struct FilterContentView: View {
                 }
             })
         }
+        .onAppear{
+            //画面表示の処理
+            viewModel.apply(.onAppear)
+        }
+        .actionSheet(isPresented: $viewModel.isShowActionSheet){
+            actionSheet
+        }
     }
-    
     var actionSheet: ActionSheet{
         var buttons: [ActionSheet.Button] = []
         
@@ -57,8 +64,15 @@ struct FilterContentView: View {
         //キャンセルボタン
         let cancelButton = ActionSheet.Button.cancel(Text("キャンセル"))
         buttons.append(cancelButton)
+        
+        let actionSheet = ActionSheet(title: Text("画像の選択"),
+                                      message: nil, buttons: buttons)
+        
+        return actionSheet
     }
+    
 }
+
 
 struct FilterContentView_Previews: PreviewProvider {
     static var previews: some View {
