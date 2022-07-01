@@ -12,6 +12,7 @@ class FilterContentViewModel: ObservableObject{
         case onAppear
         case tappedActionSheet(selectType:UIImagePickerController.SourceType)
         
+        
     }
     @Published var image: UIImage?
     @Published var isShowActionSheet = false

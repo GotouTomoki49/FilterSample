@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F307D46286E7DBE009BCC4E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F307D45286E7DBE009BCC4E /* ImagePicker.swift */; };
 		7FBAA312286A84A900E775D8 /* FilterSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBAA311286A84A900E775D8 /* FilterSampleApp.swift */; };
 		7FBAA314286A84A900E775D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBAA313286A84A900E775D8 /* ContentView.swift */; };
 		7FBAA316286A84AC00E775D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FBAA315286A84AC00E775D8 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F307D45286E7DBE009BCC4E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7FBAA30E286A84A900E775D8 /* FilterSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FBAA311286A84A900E775D8 /* FilterSampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSampleApp.swift; sourceTree = "<group>"; };
 		7FBAA313286A84A900E775D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		7FBAA323286A84E600E775D8 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				7F307D45286E7DBE009BCC4E /* ImagePicker.swift */,
 			);
 			path = ImagePicker;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				7FBAA327286A914C00E775D8 /* FilterBannerView.swift in Sources */,
 				7FBAA314286A84A900E775D8 /* ContentView.swift in Sources */,
 				7FBAA312286A84A900E775D8 /* FilterSampleApp.swift in Sources */,
+				7F307D46286E7DBE009BCC4E /* ImagePicker.swift in Sources */,
 				7FBAA329286A93E600E775D8 /* FilterContentViewModel.swift in Sources */,
 				7FBAA325286A8AB100E775D8 /* FilterContentView.swift in Sources */,
 			);

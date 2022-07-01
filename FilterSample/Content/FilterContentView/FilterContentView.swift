@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct FilterContentView: View {
-    @State private var filtedImage: UIImage?
+    @State private var filteredImage: UIImage?
     @StateObject private var viewModel = FilterContentViewModel()
     var body: some View {
         NavigationView{
             ZStack{
-                if let filtedImage = filtedImage {
-                    Image(uiImage: filtedImage)
+                if let filteredImage = filteredImage {
+                    Image(uiImage: filteredImage)
                 } else{
                     EmptyView()
                 }
@@ -40,6 +40,12 @@ struct FilterContentView: View {
         .actionSheet(isPresented: $viewModel.isShowActionSheet){
             actionSheet
         }
+        .sheet(isPresented: $viewModel.isShowImagePickerView){
+            // ImagePicker
+            ImagePicker(isShown:$viewModel.isShowImagePickerView,image: $viewModel.image,
+                        sourceType: viewModel.selectedSourceType)
+        }
+        
     }
     var actionSheet: ActionSheet{
         var buttons: [ActionSheet.Button] = []
