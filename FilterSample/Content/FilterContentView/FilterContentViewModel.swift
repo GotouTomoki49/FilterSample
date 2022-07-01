@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class FilterContentViewModel: ObservableObject{
     enum Inputs{
@@ -15,10 +16,27 @@ class FilterContentViewModel: ObservableObject{
         
     }
     @Published var image: UIImage?
+    @Published var filterdImage: UIImage?
     @Published var isShowActionSheet = false
     @Published var isShowImagePickerView = false
     
     @Published  var selectedSourceType: UIImagePickerController.SourceType = .camera
+    
+    //Combineを実行するためのCancellable
+    var cancellables: [Cancellable] = []
+    
+    init(){
+        //$を付けている(状態変数として使う→Published→Publisher)
+        let imageCancellable = $image.sink{[weak self]
+            uiimage in
+            guard let self = self, let uiimage = uiimage
+            else {return }
+            
+            self.filterdImage = uiimage
+        }
+        
+        cancellables.append(imageCancellable)
+    }
     
     func apply(_ inputs: Inputs){
         switch inputs{

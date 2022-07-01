@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct FilterContentView: View {
-    @State private var filteredImage: UIImage?
+    
     @StateObject private var viewModel = FilterContentViewModel()
+    
     var body: some View {
         NavigationView{
             ZStack{
-                if let filteredImage = filteredImage {
+                if let filteredImage = viewModel.filterdImage {
                     Image(uiImage: filteredImage)
                 } else{
                     EmptyView()
