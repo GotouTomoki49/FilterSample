@@ -13,14 +13,16 @@ class FilterContentViewModel: ObservableObject{
         case onAppear
         case tappedActionSheet(selectType:UIImagePickerController.SourceType)
         
-        
     }
+    
     @Published var image: UIImage?
     @Published var filterdImage: UIImage?
     @Published var isShowActionSheet = false
     @Published var isShowImagePickerView = false
     
     @Published  var selectedSourceType: UIImagePickerController.SourceType = .camera
+    
+    @Published var isShowBammer = false
     
     //Combineを実行するためのCancellable
     var cancellables: [Cancellable] = []
@@ -30,7 +32,10 @@ class FilterContentViewModel: ObservableObject{
         let imageCancellable = $image.sink{[weak self]
             uiimage in
             guard let self = self, let uiimage = uiimage
-            else {return }
+            else {
+                return
+                
+            }
             
             self.filterdImage = uiimage
         }

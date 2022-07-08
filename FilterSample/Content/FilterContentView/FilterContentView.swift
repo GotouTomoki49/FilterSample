@@ -16,6 +16,12 @@ struct FilterContentView: View {
             ZStack{
                 if let filteredImage = viewModel.filterdImage {
                     Image(uiImage: filteredImage)
+                        .onTapGesture {
+                            withAnimation{
+                                viewModel.isShowBammer
+                                    .toggle()
+                            }
+                        }
                 } else{
                     EmptyView()
                 }
