@@ -8,34 +8,28 @@
 import SwiftUI
 import Combine
 
-class FilterContentViewModel: ObservableObject{
-    enum Inputs{
+final class FilterContentViewModel: ObservableObject {
+    enum Inputs {
         case onAppear
-        case tappedActionSheet(selectType:UIImagePickerController.SourceType)
-        
+        case tappedActionSheet(selectType: UIImagePickerController.SourceType)
     }
-    
     @Published var image: UIImage?
     @Published var filterdImage: UIImage?
+    
     @Published var isShowActionSheet = false
     @Published var isShowImagePickerView = false
     
-    @Published  var selectedSourceType: UIImagePickerController.SourceType = .camera
+    @Published var selectedSourceType: UIImagePickerController.SourceType = .camera
+    // フィルターバナー
+    @Published var isShowBanner = false
     
-    @Published var isShowBammer = false
-    
-    //Combineを実行するためのCancellable
+    // Combineを実行するためのCancellable
     var cancellables: [Cancellable] = []
     
-    init(){
-        //$を付けている(状態変数として使う→Published→Publisher)
-        let imageCancellable = $image.sink{[weak self]
-            uiimage in
-            guard let self = self, let uiimage = uiimage
-            else {
-                return
-                
-            }
+    init() {
+        // $を付けている　Published→Publisher
+        let imageCancellable = $image.sink { [weak self] uiimage in
+            guard let self = self, let uiimage = uiimage else { return }
             
             self.filterdImage = uiimage
         }
@@ -43,21 +37,16 @@ class FilterContentViewModel: ObservableObject{
         cancellables.append(imageCancellable)
     }
     
-    func apply(_ inputs: Inputs){
-        switch inputs{
-        case.onAppear:
-            //アクションシートを表示したい
-            if image == nil{
+    func apply(_ inputs: Inputs) {
+        switch inputs {
+        case .onAppear:
+            if image == nil {
                 isShowActionSheet = true
-                
             }
-            
-        case .tappedActionSheet(selectType: let sourceType):
-            //フォトライブラリーを起動、あるいはカメラを起動
+        case .tappedActionSheet(let sourceType):
+            // フォトライブラリーを起動
             selectedSourceType = sourceType
             isShowImagePickerView = true
-            
         }
     }
-    
 }
