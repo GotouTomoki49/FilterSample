@@ -4,6 +4,7 @@
 //
 //  Created by cmStudent on 2022/06/28.
 //
+
 import SwiftUI
 
 struct FilterContentView: View {
@@ -15,17 +16,23 @@ struct FilterContentView: View {
             ZStack {
                 if let filterdImage = viewModel.filterdImage {
                     Image(uiImage: filterdImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                         .onTapGesture {
                             withAnimation {
-                                viewModel.isShowBanner.toggle()
+                                viewModel.isShowBanner = true
                             }
                         }
                 } else {
                     EmptyView()
                 }
-                FilterBannerView()
-            }
-            .navigationTitle("ふぃるたー")
+                FilterBannerView(isShowBanner: $viewModel.isShowBanner,applyingFilter: $viewModel.applyingFilter)
+                
+            }// ZStackの終わり
+            // Navigation Titleの設定
+            .navigationTitle("ふぃるたーくん")
+            // Navigation Item
+            // trailingにHStackでButtonを２つ置く
             .navigationBarItems(trailing: HStack {
                 Button {} label: {
                     Image(systemName: "square.and.arrow.down")
@@ -35,6 +42,7 @@ struct FilterContentView: View {
                 }
             })
             .onAppear{
+                // 画面表示時の処理
                 viewModel.apply(.onAppear)
             }
             .actionSheet(isPresented: $viewModel.isShowActionSheet) {
@@ -66,8 +74,7 @@ struct FilterContentView: View {
         let cancelButton = ActionSheet.Button.cancel(Text("キャンセル"))
         buttons.append(cancelButton)
         
-        let actionSheet = ActionSheet(title: Text("画像選択"), message: nil, buttons: buttons)
-        
+        let actionSheet = ActionSheet(title: Text("画像を選択する"), message: nil, buttons: buttons)
         return actionSheet
         
     }

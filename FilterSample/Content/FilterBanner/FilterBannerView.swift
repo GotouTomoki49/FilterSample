@@ -7,21 +7,31 @@
 
 import SwiftUI
 
+// 部品を組み合わせてFilterBannerViewを作る
 struct FilterBannerView: View {
     @State var selectedFilter: FilterType? = nil
-    
+    @Binding var isShowBanner: Bool
+    @Binding var applyingFilter: FilterType?
     var body: some View {
-        VStack {
-            FilterTitleView(title: nil)
-            FilterIconContainerView(selectedFilter: $selectedFilter)
-            FilterButtonContainerView()
+        GeometryReader { geometry in
+            VStack {
+                Spacer()
+                VStack {
+                    FilterTitleView(title: selectedFilter?.rawValue)
+                    FilterIconContainerView(selectedFilter: $selectedFilter)
+                    FilterButtonContainerView(isShowBanner: $isShowBanner, selectedFilter: $selectedFilter,applyingFilter: $applyingFilter)
+                }
+                .background(Color.black.opacity(0.5))
+                .foregroundColor(.white)
+                .offset(x: 0, y: isShowBanner ? 0 : geometry.size.height)
+            }
         }
     }
 }
 
 struct FilterBannerView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterBannerView()
+        FilterBannerView(isShowBanner: .constant(true), applyingFilter: .constant(.gaussianBlur))
     }
 }
 
@@ -39,13 +49,14 @@ struct FilterImage: View {
     // フィルターがかかった画像を作る
     @State private var image: Image?
     // 何のフィルターか
-    let filterType: FilterType
-    @Binding var selectedFilter: FilterType?
+    let filterType: FilterType // 自分自身のFilterType
+    @Binding var selectedFilter: FilterType? // もしかしたら他のFilterTypeかもしれない
     
     let uiImage: UIImage = UIImage(named: "image")!
     var body: some View {
         Button {
             selectedFilter = filterType
+            // フィルター処理
         } label: {
             image?
                 .resizable()
@@ -53,7 +64,7 @@ struct FilterImage: View {
                 .scaledToFit()
         }
         .frame(width: 70, height: 70)
-        .border(Color.white)
+        .border(Color.primary, width: selectedFilter == filterType ? 4 : 0)
         .onAppear {
             // フィルターをかける
             if let outputImage = filterType.filter(inputImage: uiImage) {
@@ -86,11 +97,20 @@ struct FilterIconContainerView: View {
 }
 
 struct FilterButtonContainerView: View {
+    @Binding var isShowBanner: Bool
+    @Binding var selectedFilter: FilterType?
+    @Binding var applyingFilter: FilterType?
+    
     var body: some View {
         HStack {
-            
             Button {
                 // 閉じる処理
+                withAnimation {
+                    // 閉じる
+                    isShowBanner = false
+                    selectedFilter = nil
+                }
+                
             } label: {
                 Image(systemName: "xmark")
                     .resizable()
@@ -98,10 +118,14 @@ struct FilterButtonContainerView: View {
                     .frame(width: 20)
                     .padding()
             }
+            
             Spacer()
             
             Button {
-                // 確定する処理
+                isShowBanner = false
+                applyingFilter = selectedFilter
+                selectedFilter = nil
+                
             } label: {
                 Image(systemName: "checkmark")
                     .resizable()
