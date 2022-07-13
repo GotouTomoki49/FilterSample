@@ -87,6 +87,8 @@ final class FilterContentViewModel: NSObject, ObservableObject {
             // 画像を保存する処理
             UIImageWriteToSavedPhotosAlbum(filterdImage!, self, #selector(imageSaveCompletion(_:didFinishSaveingWithError:contextInfo:)), nil)
             //break
+        case .tappedActionSheet:
+            isShowActionSheet = true
             
         }
     }

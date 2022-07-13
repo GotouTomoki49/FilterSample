@@ -42,6 +42,9 @@ struct FilterContentView: View {
                     viewModel.apply(.tappedActionSheet(selectType: .photoLibrary))
                 } label: {
                     Image(systemName: "photo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30, alignment: .bottom)
                 }
                 
             })
